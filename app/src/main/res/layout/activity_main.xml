@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#E8EAEA"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/customAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/nasa_icon"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toEndOf="@id/imageView"
+                    android:text="Nasa"
+                    android:textSize="24sp"
+                    android:textColor="#FFFFFF"/>
+                <Spinner
+                    android:id="@+id/cameraSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorWhite"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:entries="@array/filter_options"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@id/cameraSpinner"
+                    app:layout_constraintTop_toTopOf="@id/cameraSpinner"
+                    app:layout_constraintBottom_toBottomOf="@id/cameraSpinner"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="14sp"
+                    android:text="Camera:"
+                    android:textColor="#FFF"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayoutRover"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="fill"
+        android:minHeight="50dp"
+        app:tabIndicatorColor="@color/colorPrimaryDark"
+        app:layout_constraintTop_toBottomOf="@id/customAppBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabCuriosity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Curiosity"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabOpportunity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opportunity"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabSpirit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Spirit"/>
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRoversPhoto"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@id/tvAlert"
+        app:layout_constraintTop_toBottomOf="@id/tabLayoutRover"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <ProgressBar
+        android:id="@+id/progressMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:id="@+id/tvAlert"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:text="No internet connection!"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

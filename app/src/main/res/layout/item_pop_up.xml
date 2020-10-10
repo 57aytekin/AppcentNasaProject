@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:minWidth="400dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivPopUpImage"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/photo_placeholder"
+                android:nestedScrollingEnabled="false"
+                app:layout_collapseMode="parallax"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/app_name" />
+            <TextView
+                android:id="@+id/tvPopupDateHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="5dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ivPopUpImage"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Date Taken Photo: "/>
+            <TextView
+                android:id="@+id/tvPopupDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvPopupDateHint"
+                app:layout_constraintTop_toTopOf="@id/tvPopupDateHint"
+                android:text="20.20.2020"/>
+
+            <TextView
+                android:id="@+id/tvPopupRoverNameHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvPopupDateHint"
+                app:layout_constraintStart_toStartOf="@id/tvPopupDateHint"
+                android:text="Rover Name: "
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvPopupRoverName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvPopupRoverNameHint"
+                app:layout_constraintTop_toTopOf="@id/tvPopupRoverNameHint"
+                android:text="Curiosity"/>
+
+            <TextView
+                android:id="@+id/tvPopupCameraHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvPopupRoverNameHint"
+                app:layout_constraintStart_toStartOf="@id/tvPopupRoverNameHint"
+                android:textStyle="bold"
+                android:text="Camera Name: "/>
+            <TextView
+                android:id="@+id/tvPopupCamera"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvPopupCameraHint"
+                app:layout_constraintTop_toTopOf="@id/tvPopupCameraHint"
+                android:text="Chemistry and Camera Complex"/>
+            <TextView
+                android:id="@+id/tvPopupRoverStatusHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvPopupCameraHint"
+                app:layout_constraintStart_toStartOf="@id/tvPopupCameraHint"
+                android:textStyle="bold"
+                android:text="Rover Status: "/>
+            <TextView
+                android:id="@+id/tvPopupRoverStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvPopupRoverStatusHint"
+                app:layout_constraintTop_toTopOf="@id/tvPopupRoverStatusHint"
+                android:text="Active"/>
+            <TextView
+                android:id="@+id/tvPopupLandingDateHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvPopupRoverStatusHint"
+                app:layout_constraintStart_toStartOf="@id/tvPopupRoverStatusHint"
+                android:textStyle="bold"
+                android:text="Rover Landing Date: "/>
+            <TextView
+                android:id="@+id/tvPopupLandingDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvPopupLandingDateHint"
+                app:layout_constraintTop_toTopOf="@id/tvPopupLandingDateHint"
+                android:text="02.02.2020"/>
+            <TextView
+                android:id="@+id/tvPopupLaunchDateHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvPopupLandingDateHint"
+                app:layout_constraintStart_toStartOf="@id/tvPopupLandingDateHint"
+                android:textStyle="bold"
+                android:text="Rover Launch Date: "/>
+            <TextView
+                android:id="@+id/tvPopupLaunchDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvPopupLaunchDateHint"
+                app:layout_constraintTop_toTopOf="@id/tvPopupLaunchDateHint"
+                android:text="02.02.2020"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

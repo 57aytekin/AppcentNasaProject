@@ -1,10 +1,25 @@
 package com.example.appcentnasaproject.data.entities
 
+import androidx.annotation.NonNull
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+
+@Entity
 data class NasaData(
-    val camera: Camera,
+    @PrimaryKey(autoGenerate = false)
+    @SerializedName("id")
+    val nasaDataId: Int,
+    @SerializedName("camera")
+    @Embedded
+    @NonNull
+    val camera: Camera? = null,
+    @Embedded
+    @NonNull
+    val rover: Rover? = null,
     val earth_date: String,
-    val id: Int,
-    val img_src: String,
-    val rover: Rover,
+    @SerializedName("img_src")
+    val nasaDataImage: String,
     val sol: Int
 )

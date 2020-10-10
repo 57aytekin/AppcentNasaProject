@@ -1,26 +1,23 @@
 package com.example.appcentnasaproject.ui
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appcentnasaproject.R
 import com.example.appcentnasaproject.data.adapter.NasaDataAdapter
-import com.example.appcentnasaproject.data.api.NasaApi
 import com.example.appcentnasaproject.data.entities.NasaData
 import com.example.appcentnasaproject.data.response.NasaDataResponse
-import com.example.appcentnasaproject.repository.NasaDataRepository
 import com.example.appcentnasaproject.util.*
 import com.example.appcentnasaproject.viewmodel.NasaDataViewModel
-import com.example.appcentnasaproject.viewmodel.NasaDataViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -53,7 +50,7 @@ class MainActivity : AppCompatActivity(), ItemClickListener {
         layoutManager = LinearLayoutManager(this)
         adapter = NasaDataAdapter(listOf(), this, this)
 
-        getNasaData()
+        getNasaData(true)
         selectedSpinner()
         tabSelected()
 
@@ -102,17 +99,17 @@ class MainActivity : AppCompatActivity(), ItemClickListener {
                     0 ->{
                         progressMain.visibility = View.VISIBLE
                         roverName = "Curiosity"
-                        getNasaData()
+                        getNasaData(true)
                     }
                     1 -> {
                         progressMain.visibility = View.VISIBLE
                         roverName = "opportunity"
-                        getNasaData()
+                        getNasaData(true)
                     }
                     2 -> {
                         progressMain.visibility = View.VISIBLE
                         roverName = "Spirit"
-                        getNasaData()
+                        getNasaData(true)
                     }
                 }
             }
@@ -137,8 +134,9 @@ class MainActivity : AppCompatActivity(), ItemClickListener {
                     }
                 }
             }catch (e : NoInternetException){
+                tvAlert.visibility = View.VISIBLE
+                tvAlert.text = "No internet connection"
                 Log.d("HATAA", e.message!!)
-                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
             }catch (e : Exception){
                 Log.d("HATA",e.message!!)
             }
@@ -162,13 +160,13 @@ class MainActivity : AppCompatActivity(), ItemClickListener {
                     8 ->{ cameraName = SortType.PANCAM.name }
                     9 ->{ cameraName = SortType.MINITES.name }
                 }
-                getNasaData()
-                tvAlert.visibility = View.GONE
+                //tvAlert.visibility = View.GONE
+                getNasaData(false)
             }
         }
     }
 
-    private fun getNasaData() {
+    private fun getNasaData(isTabSelected : Boolean) {
         progressMain.visibility = View.VISIBLE
         pageNumber = 1
         Coroutines.main {
@@ -178,21 +176,36 @@ class MainActivity : AppCompatActivity(), ItemClickListener {
                 }else{
                     viewModel.getNasaData(roverName!!, pageNumber, cameraName!!)
                 }
-                rvRoversPhoto.also {
-                    progressMain.visibility = View.GONE
-                    adapter = NasaDataAdapter(data.photoList,this, this)
-                    it.adapter = adapter
-                    adapter.notifyDataSetChanged()
-                    it.layoutManager = layoutManager
-                    it.setHasFixedSize(true)
+                if (isTabSelected){
+                    viewModel.saveAllData(data.photoList)
                 }
+                tvAlert.visibility = View.GONE
+                setupRecycler(data.photoList)
             }catch (e : NoInternetException){
-                progressMain.visibility = View.GONE
-                Toast.makeText(this, "İnternet bağlantısı bulunamadı", Toast.LENGTH_SHORT).show()
+                tvAlert.visibility = View.VISIBLE
+                tvAlert.text = "No internet connection"
+                Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
+                val localData : List<NasaData> = if (cameraName == SortType.All.name){
+                    viewModel.getLocalAllData(roverName!!)
+                }else{
+                    viewModel.getLocalSelectedCamera(cameraName!!, roverName!!)
+                }
+                setupRecycler(localData)
             }catch (e :Exception){
                 progressMain.visibility = View.GONE
                 Toast.makeText(this, ""+e.printStackTrace(), Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun setupRecycler(data: List<NasaData>) {
+        rvRoversPhoto.also {
+            progressMain.visibility = View.GONE
+            adapter = NasaDataAdapter(data,this, this)
+            it.adapter = adapter
+            adapter.notifyDataSetChanged()
+            it.layoutManager = layoutManager
+            it.setHasFixedSize(true)
         }
     }
 

@@ -23,10 +23,10 @@ class ItemDialog(
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.item_pop_up)
 
-        Glide.with(context).load(item.img_src).into(ivPopUpImage)
+        Glide.with(context).load(item.nasaDataImage).into(ivPopUpImage)
         tvPopupDate.text = item.earth_date
-        tvPopupRoverName.text = item.rover.name
-        tvPopupCamera.text = item.camera.full_name
+        tvPopupRoverName.text = item.rover!!.roverName
+        tvPopupCamera.text = item.camera!!.full_name
         tvPopupRoverStatus.text = item.rover.status
         tvPopupLandingDate.text = item.rover.landing_date
         tvPopupLaunchDate.text = item.rover.launch_date

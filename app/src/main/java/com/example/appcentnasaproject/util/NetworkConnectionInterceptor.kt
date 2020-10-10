@@ -8,9 +8,10 @@ import okhttp3.Response
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.Socket
+import javax.inject.Inject
 
-class NetworkConnectionInterceptor(
-    val context: Context
+class NetworkConnectionInterceptor@Inject constructor(
+    context: Context
 ) : Interceptor {
     private val applicationContext = context.applicationContext
     override fun intercept(chain: Interceptor.Chain): Response {

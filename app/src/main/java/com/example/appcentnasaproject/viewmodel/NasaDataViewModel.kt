@@ -1,12 +1,13 @@
 package com.example.appcentnasaproject.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.example.appcentnasaproject.data.response.NasaDataResponse
 import com.example.appcentnasaproject.repository.NasaDataRepository
 import com.example.appcentnasaproject.util.Coroutines
 import kotlinx.coroutines.CoroutineScope
 
-class NasaDataViewModel(
+class NasaDataViewModel @ViewModelInject constructor(
     private val repository: NasaDataRepository
 ) : ViewModel(){
 

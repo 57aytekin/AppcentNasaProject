@@ -1,11 +1,13 @@
 package com.example.appcentnasaproject.ui
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,10 +22,12 @@ import com.example.appcentnasaproject.util.*
 import com.example.appcentnasaproject.viewmodel.NasaDataViewModel
 import com.example.appcentnasaproject.viewmodel.NasaDataViewModelFactory
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), ItemClickListener {
-    private lateinit var viewModel: NasaDataViewModel
+    private val viewModel: NasaDataViewModel by viewModels()
     private lateinit var adapter : NasaDataAdapter
     private lateinit var dialog : ItemDialog
 
@@ -44,14 +48,8 @@ class MainActivity : AppCompatActivity(), ItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
-        val api = NasaApi(networkConnectionInterceptor)
-        val repository = NasaDataRepository(api)
-        //Curiosity, opportunity, Spirit
         roverName = "Curiosity"
         cameraName = SortType.All.name
-        val factory = NasaDataViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(NasaDataViewModel::class.java)
         layoutManager = LinearLayoutManager(this)
         adapter = NasaDataAdapter(listOf(), this, this)
 
@@ -130,6 +128,7 @@ class MainActivity : AppCompatActivity(), ItemClickListener {
                 }else{
                     viewModel.getNasaData(roverName, pageNumber, cameraName)
                 }
+
                 if (data.photoList.isNotEmpty()){
                     rvRoversPhoto.apply {
                         (adapter as? NasaDataAdapter)?.addData(data.photoList)

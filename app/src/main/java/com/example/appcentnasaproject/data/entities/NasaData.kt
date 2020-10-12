@@ -11,10 +11,12 @@ data class NasaData(
     @PrimaryKey(autoGenerate = false)
     @SerializedName("id")
     val nasaDataId: Int,
+
     @SerializedName("camera")
     @Embedded
     @NonNull
-    val camera: Camera? = null,
+    val nasaCamera: Camera? = null,
+
     @Embedded
     @NonNull
     val rover: Rover? = null,

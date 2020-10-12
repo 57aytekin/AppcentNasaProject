@@ -12,5 +12,6 @@ data class Camera(
     @SerializedName("name")
     val cameraName: String,
     val full_name: String,
-    val rover_id: Int
+    @SerializedName("rover_id")
+    val camera_rover_id: Int
 )

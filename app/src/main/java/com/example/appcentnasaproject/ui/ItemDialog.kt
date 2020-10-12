@@ -26,7 +26,7 @@ class ItemDialog(
         Glide.with(context).load(item.nasaDataImage).into(ivPopUpImage)
         tvPopupDate.text = item.earth_date
         tvPopupRoverName.text = item.rover!!.roverName
-        tvPopupCamera.text = item.camera!!.full_name
+        tvPopupCamera.text = item.nasaCamera!!.full_name
         tvPopupRoverStatus.text = item.rover.status
         tvPopupLandingDate.text = item.rover.landing_date
         tvPopupLaunchDate.text = item.rover.launch_date

@@ -34,9 +34,7 @@ class NasaDataAdapter(
     override fun onBindViewHolder(holder: RoversViewHolder, position: Int) {
         val nasaRover = rovers[position]
         Glide.with(context).load(nasaRover.nasaDataImage).apply(RequestOptions().override(800)).into(holder.itemView.ivPhoto)
-        holder.itemView.tvRoverName.text = nasaRover.rover!!.roverName
-        holder.itemView.tvPhotoId.text = nasaRover.nasaDataId.toString()
-        holder.itemView.camera.text = nasaRover.camera!!.cameraName
+        holder.itemView.tvCameraFullName.text = nasaRover.nasaCamera!!.full_name
         holder.itemView.card_view.setOnClickListener {
             itemClick.onItemClickListener(nasaRover)
         }

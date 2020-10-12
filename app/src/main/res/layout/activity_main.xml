@@ -113,6 +113,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvNoValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="Data not found. \nYou can check to other cameras."/>
+
     <TextView
         android:id="@+id/tvAlert"
         android:layout_width="0dp"

@@ -18,6 +18,7 @@ import com.example.appcentnasaproject.data.entities.NasaData
 import com.example.appcentnasaproject.data.response.NasaDataResponse
 import com.example.appcentnasaproject.util.*
 import com.example.appcentnasaproject.viewmodel.NasaDataViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -103,7 +104,7 @@ class MainActivity : AppCompatActivity(), ItemClickListener {
                     }
                     1 -> {
                         progressMain.visibility = View.VISIBLE
-                        roverName = "opportunity"
+                        roverName = "Opportunity"
                         getNasaData(true)
                     }
                     2 -> {
@@ -176,20 +177,25 @@ class MainActivity : AppCompatActivity(), ItemClickListener {
                 }else{
                     viewModel.getNasaData(roverName!!, pageNumber, cameraName!!)
                 }
+                if (data.photoList.isEmpty()){
+                    tvNoValue.visibility = View.VISIBLE
+                }else{
+                    tvNoValue.visibility = View.GONE
+                }
                 if (isTabSelected){
                     viewModel.saveAllData(data.photoList)
                 }
                 tvAlert.visibility = View.GONE
                 setupRecycler(data.photoList)
             }catch (e : NoInternetException){
-                tvAlert.visibility = View.VISIBLE
-                tvAlert.text = "No internet connection"
-                Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
+                Snackbar.make(tvAlert, "No internet connection", Snackbar.LENGTH_SHORT).show()
                 val localData : List<NasaData> = if (cameraName == SortType.All.name){
                     viewModel.getLocalAllData(roverName!!)
                 }else{
                     viewModel.getLocalSelectedCamera(cameraName!!, roverName!!)
                 }
+                tvAlert.visibility = View.VISIBLE
+                tvAlert.text = "No internet connection"
                 setupRecycler(localData)
             }catch (e :Exception){
                 progressMain.visibility = View.GONE

@@ -1,1 +1,9 @@
-
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.smartapps.allday",
+    "sha256_cert_fingerprints":
+    ["2C:48:D2:08:B2:5F:9F:F7:42:9F:4B:56:04:18:D9:14:33:C3:D5:98:07:5F:6D:7A:70:8B:6A:70:9E:6D:6B:BE"]
+  }
+}]
